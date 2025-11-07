@@ -1,0 +1,83 @@
+Masurca script for all the type of assembly
+##################################################################
+🟢 Case 1: Illumina-only data
+##################################################################
+DATA
+PE=pe 500 50 /home/muthu/borassus/R1.fastq.gz /home/muthu/borassus/R2.fastq.gz
+END
+
+PARAMETERS
+EXTEND_JUMP_READS=0
+GRAPH_KMER_SIZE=auto
+USE_LINKING_MATES=0
+USE_GRID=0
+NUM_THREADS=50
+JF_SIZE=20000000000
+CA_PARAMETERS=cgwErrorRate=0.15
+CLOSE_GAPS=1
+SOAP_ASSEMBLY=0
+FLYE_ASSEMBLY=0
+END
+
+
+
+####################################################################
+🟣 Case 2: Hybrid (Illumina + Nanopore)
+###################################################################
+DATA
+PE=pe 500 50 /home/muthu/borassus/R1.fastq.gz /home/muthu/borassus/R2.fastq.gz
+NANOPORE=/home/muthu/borassus/nanopore.fastq.gz
+END
+
+PARAMETERS
+EXTEND_JUMP_READS=0
+GRAPH_KMER_SIZE=auto
+USE_LINKING_MATES=1
+USE_GRID=0
+NUM_THREADS=50
+JF_SIZE=20000000000
+LHE_COVERAGE=25
+MEGA_READS_ONE_PASS=0
+CA_PARAMETERS=cgwErrorRate=0.15
+CLOSE_GAPS=1
+SOAP_ASSEMBLY=0
+FLYE_ASSEMBLY=1
+END
+
+
+
+
+##################################################################
+🟣 Config File (PacBio + Reference genome)
+# MaSuRCA config file for PacBio + Reference-guided assembly
+##################################################################
+DATA
+# PacBio reads
+PACBIO=/home/muthu/borassus/pacbio_reads.fastq.gz
+
+# Reference genome for synteny-assisted assembly
+REFERENCE=/home/muthu/borassus/reference_genome.fa
+END
+
+PARAMETERS
+# --- Assembly control parameters ---
+GRAPH_KMER_SIZE=auto
+USE_LINKING_MATES=0
+USE_GRID=0
+NUM_THREADS=50
+JF_SIZE=1000000000
+
+# --- Long-read assembly settings ---
+FLYE_ASSEMBLY=1
+LHE_COVERAGE=30
+MEGA_READS_ONE_PASS=1
+
+# --- Scaffolding and gap closing ---
+CLOSE_GAPS=1
+
+# --- Error tolerance for CABOG/Flye ---
+CA_PARAMETERS=cgwErrorRate=0.15
+END
+
+
+#################################################################
