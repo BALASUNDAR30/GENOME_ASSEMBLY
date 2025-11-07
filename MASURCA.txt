@@ -78,6 +78,39 @@ CLOSE_GAPS=1
 # --- Error tolerance for CABOG/Flye ---
 CA_PARAMETERS=cgwErrorRate=0.15
 END
-
-
 #################################################################
+
+
+DATA
+PE= p1 500 50 /data/pe_lane1_R1.fastq.gz /data/pe_lane1_R2.fastq.gz
+PE= p2 500 50 /data/pe_lane2_R1.fastq.gz /data/pe_lane2_R2.fastq.gz
+PACBIO=/data/pacbio_part1.fastq.gz
+PACBIO=/data/pacbio_part2.fastq.gz
+PACBIO=/data/pacbio_part3.fastq.gz
+END
+
+PARAMETERS
+USE_LINKING_MATES=1
+FLYE_ASSEMBLY=1
+MEGA_READS_ONE_PASS=0
+NUM_THREADS=48
+JF_SIZE=20000000000
+LHE_COVERAGE=25
+END
+
+
+
+##################################################################
+DATA
+PACBIO=/data/pacbio_cell1.fastq.gz
+PACBIO=/data/pacbio_cell2.fastq.gz
+REFERENCE=/data/related_species_ref.fa
+END
+
+PARAMETERS
+FLYE_ASSEMBLY=1
+MEGA_READS_ONE_PASS=1
+NUM_THREADS=40
+LHE_COVERAGE=30
+END
+
